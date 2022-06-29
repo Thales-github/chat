@@ -12,7 +12,7 @@ try {
     die();
 }
 
-$comando = $conexao->prepare("insert into MENSAGENS (MEN_USUARIO, MEN_CONTEUDO) values(:USUARIO, :CONTEUDO)");
+$comando = $conexao->prepare("insert into mensagens (MEN_USUARIO, MEN_CONTEUDO) values(:USUARIO, :CONTEUDO)");
 $comando->bindValue(":USUARIO", $usuario);
 $comando->bindValue(":CONTEUDO", $conteudo);
 
