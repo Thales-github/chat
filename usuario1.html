@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT</title>
+</head>
+
+<body>
+    <form action="#" class="formulario">
+        <input type="text" name="txtUsuario" placeholder="Seu nome*"> <br /><br />
+        <textarea name="txtConteudo" id="" cols="40" rows="8" placeholder="Sua mensagem*"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+    <div class="chat"></div>
+
+    <script>
+
+        let formulario = document.querySelector(".formulario");
+        formulario.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let ajax = new XMLHttpRequest();
+            ajax.open("post", "gravaMensagem.php");
+
+            ajax.send(new FormData(formulario));
+
+        });
+
+        let painelMensagens = document.querySelector(".chat");
+
+        function recuperarDados() {
+
+            let painelMensagens = document.querySelector(".chat");
+
+                let ajax = new XMLHttpRequest();
+                ajax.open("get", "recuperaMensagens.php");
+
+                ajax.onload = function () {
+                    let mensagens = JSON.parse(ajax.responseText);
+                    console.log(mensagens);
+                   
+                    painelMensagens.innerHTML = "";
+                    mensagens.forEach(element => {
+                       
+                        painelMensagens.innerHTML += `Usuário: ${element.MEN_USUARIO} mensagem: ${element.MEN_CONTEUDO} \n <br />`;
+                    });
+                }
+            ajax.send();
+        }
+
+        setInterval(function() {recuperarDados();}, 1000);
+    </script>
+</body>
+
+</html>
