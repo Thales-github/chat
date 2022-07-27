@@ -20,7 +20,7 @@ function recuperarDados() {
 
     ajax.onload = function () {
         let mensagens = JSON.parse(ajax.responseText);
-        //console.log(mensagens);
+        console.log(mensagens);
 
         painelMensagens.innerHTML = "";
         mensagens.forEach(element => {
@@ -30,5 +30,5 @@ function recuperarDados() {
     }
     ajax.send();
 }
-
+//recuperarDados();
 setInterval(function () { recuperarDados(); }, 1000);
